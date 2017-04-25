@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
     templateUrl: 'sigdre.component.html'
 })
 
-export class DashboardComponent{}
+export class SigdreComponent{}
