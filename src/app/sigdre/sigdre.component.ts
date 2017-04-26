@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, Renderer, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
 
 enum MenuOrientation {
     STATIC,
@@ -9,7 +9,8 @@ enum MenuOrientation {
 declare var jQuery: any;
 
 @Component({
-    selector: 'sigdre-root',
+    selector: 'sigdre',
+    encapsulation: ViewEncapsulation.None,
     templateUrl: './sigdre.component.html',
     styleUrls: ['./sigdre.component.scss']
 })

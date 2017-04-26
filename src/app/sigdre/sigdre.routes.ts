@@ -1,11 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
+import { SigdreComponent } from './sigdre.component';
 import { Dashboard } from './home/view/dashboard';
 
 export const routes: Routes =[
-    { path: '', component: Dashboard},
-    { path: 'dashboard', component: Dashboard }
-]
+    { path: '', component: SigdreComponent, children: [
+        { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+        { path: 'dashboard', component: Dashboard }
+    ]}
+];
 
 export const SigdreRoutes: ModuleWithProviders = RouterModule.forChild(routes);

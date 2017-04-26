@@ -4,12 +4,15 @@ import { SigdreRoutes } from './sigdre.routes';
 
 import { Dashboard } from './home/view/dashboard'
 
+import { SigdreComponent } from './sigdre.component';
+
 @NgModule({
     imports: [
         SigdreRoutes
     ],
     declarations: [
-        Dashboard
+        Dashboard,
+        SigdreComponent
     ],
     providers:[
 

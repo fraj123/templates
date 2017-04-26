@@ -1,12 +1,11 @@
 import {Routes,RouterModule} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
 
-import { Login } from './sigdre/home/view/login';
 import { PageNotFountComponent } from './notfound.component';
 
 export const routes: Routes = [
     {
-        path: '', loadChildren: './login/login.module#LoginModule'
+        path: '', redirectTo: '/login', pathMatch: 'full'
     },
     {
         path: 'login', loadChildren: './login/login.module#LoginModule'

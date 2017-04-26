@@ -14,9 +14,9 @@ import {PageNotFountComponent} from './notfound.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutes,
     HttpModule,
-    SigdreModule
+    SigdreModule,
+    AppRoutes,
   ],
   declarations: [
     AppComponent,
