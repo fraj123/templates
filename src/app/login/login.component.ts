@@ -26,7 +26,8 @@ export class LoginComponent {
         if(!email || !password){
             return;
         } else{
-        this.loginService.loginUser(email, password)
+            this.router.navigate(['sigdre']);
+        /*this.loginService.loginUser(email, password)
             .subscribe(()=>{
                 console.log(this.loginService.loggedIn);
                 if(this.loginService.loggedIn){
@@ -36,7 +37,7 @@ export class LoginComponent {
                     this.loginIncorrect = true;
                     this.router.navigate(['']);
                 }
-            });
+            });*/
         }
     }
 

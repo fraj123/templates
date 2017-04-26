@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MODULE_COMPONENTS, MODULE_ROUTES } from './sigdre.routes';
+import { SigdreRoutes } from './sigdre.routes';
 
 import { Dashboard } from './home/view/dashboard'
 
 @NgModule({
     imports: [
-        RouterModule.forChild(MODULE_ROUTES)
+        SigdreRoutes
     ],
-    declarations: [ 
-        MODULE_COMPONENTS,
+    declarations: [
         Dashboard
     ],
     providers:[

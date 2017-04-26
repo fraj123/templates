@@ -5,6 +5,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {AppRoutes} from './app.routes';
 
+import { SigdreModule } from './sigdre/sigdre.module';
+
 import {AppComponent} from './app.component';
 import {PageNotFountComponent} from './notfound.component';
 
@@ -14,6 +16,7 @@ import {PageNotFountComponent} from './notfound.component';
     FormsModule,
     AppRoutes,
     HttpModule,
+    SigdreModule
   ],
   declarations: [
     AppComponent,
