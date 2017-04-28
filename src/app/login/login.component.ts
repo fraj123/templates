@@ -8,6 +8,7 @@ import {LoginService} from './login.service';
   styleUrls: ['./login.component.less'],
   providers: [LoginService]
 })
+
 export class LoginComponent {
 
   message: string;

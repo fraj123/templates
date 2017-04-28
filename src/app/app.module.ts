@@ -2,12 +2,14 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BrowserModule} from '@angular/platform-browser';
-import {RouterModule} from '@angular/router';
-import {AppRoutes} from './app.routes';
 
-import { SigdreModule } from './sigdre/sigdre.module';
+import {Router} from '@angular/router';
 
 import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+
+import {SigdreModule} from './sigdre/sigdre.module';
+import { LoginModule } from './login/login.module';
 import {PageNotFountComponent} from './notfound.component';
 
 @NgModule({
@@ -16,7 +18,8 @@ import {PageNotFountComponent} from './notfound.component';
     FormsModule,
     HttpModule,
     SigdreModule,
-    AppRoutes,
+    LoginModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
@@ -27,4 +30,9 @@ import {PageNotFountComponent} from './notfound.component';
   ],
   bootstrap:[AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}

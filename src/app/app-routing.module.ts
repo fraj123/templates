@@ -7,22 +7,33 @@ import { PageNotFountComponent } from './notfound.component';
 
 const appRoutes: Routes = [
     {
-        path: 'login', loadChildren: './login/login.module#LoginModule'
+        path: '',   
+        redirectTo: '/login', pathMatch: 'full' 
     },
     {
-        path: 'sigdre', loadChildren: './sigdre/sigdre.module#SigdreModule'
+        path: 'login', 
+        loadChildren: './login/login.module#LoginModule'
     },
     {
-        path: '**', component: PageNotFountComponent
+        path: 'sigdre', 
+        loadChildren: './sigdre/sigdre.module#SigdreModule'
     },
     {
-        path: 'error', component: PageNotFountComponent
+        path: '**', 
+        component: PageNotFountComponent
+    },
+    {
+        path: 'error', 
+        component: PageNotFountComponent
     }
 ];
 
 @NgModule({
     imports:[
         RouterModule.forRoot(appRoutes)
+    ],
+    exports: [
+        RouterModule
     ]
 })
 
