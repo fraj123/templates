@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'rxjs/add/operator/toPromise';
 
 import {AccordionModule} from 'primeng/primeng';
@@ -67,18 +68,20 @@ import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
 
 import { SigdreComponent } from './sigdre.component';
-//import { AppMenuComponent, AppSubMenu } from './sigdre.menu.component';
-//import { AppTopBar } from './sigdre.topbar.component';
-//import { AppFooter } from './sigdre.footer.component';
-//import { InlineProfileComponent } from './sigdre.profile.component';
+import { AppMenuComponent, AppSubMenu } from './sigdre.menu.component';
+import { AppTopBar } from './sigdre.topbar.component';
+import { AppFooter } from './sigdre.footer.component';
+import { InlineProfileComponent } from './sigdre.profile.component';
 
-//import { Dashboard } from './home/view/dashboard'
+import { Dashboard } from './home/view/dashboard';
+import { Users } from './home/view/users';
 
 import { SigdreRoutingModule } from './sigdre-routing.module';
 
 @NgModule({
     imports: [
         CommonModule,
+        BrowserAnimationsModule,
         SigdreRoutingModule,
         AccordionModule,
         AutoCompleteModule,
@@ -146,12 +149,13 @@ import { SigdreRoutingModule } from './sigdre-routing.module';
     ],
     declarations: [
         SigdreComponent,
-        //AppFooter,
-        //AppMenuComponent,
-        //AppSubMenu,
-        //InlineProfileComponent,
-        //AppTopBar,
-        //Dashboard
+        AppFooter,
+        AppMenuComponent,
+        AppSubMenu,
+        InlineProfileComponent,
+        AppTopBar,
+        Dashboard,
+        Users
     ],
     providers:[
 
