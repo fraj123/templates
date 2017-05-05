@@ -23,23 +23,34 @@ export class LoginComponent {
     }
 
     loginUser(email:string, password: string){
+        let cargo = JSON.parse(localStorage.getItem('cargo')).cargo;
         this.message = 'Conectando...';
         if(!email || !password){
             return;
         } else{
-            this.router.navigate(['sigdre']);
-        /*this.loginService.loginUser(email, password)
-            .subscribe(()=>{
-                console.log(this.loginService.loggedIn);
-                if(this.loginService.loggedIn){
-                    this.loginIncorrect = false;
-                    this.router.navigate(['dashboard']);
-                } else{
-                    this.loginIncorrect = true;
-                    this.router.navigate(['']);
-                }
-            });*/
-        }
+            //this.router.navigate(['sigdre']);
+            this.loginService.loginUser(email, password)
+                .subscribe(()=>{
+                    console.log(this.loginService.loggedIn);
+                    console.log(localStorage);
+                    if(this.loginService.loggedIn){
+                        this.loginIncorrect = false;
+                        switch (cargo) {
+                            case 1:
+                                this.router.navigate(['sigdre']);       
+                                break;
+                            case 2:
+                                this.router.navigate(['sigdre', 'dashboardEmergencias']);       
+                                break;
+                            default:
+                                break;
+                        }
+                    } else{
+                        this.loginIncorrect = true;
+                        this.router.navigate(['']);
+                    }
+                });
+            }
     }
 
 }

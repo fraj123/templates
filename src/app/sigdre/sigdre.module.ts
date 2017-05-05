@@ -74,6 +74,8 @@ import { AppFooter } from './sigdre.footer.component';
 import { InlineProfileComponent } from './sigdre.profile.component';
 
 import { Dashboard } from './home/view/dashboard';
+import { DashboardEmergencias } from './home/view/dashboardEmergencias';
+import { Profile } from './home/view/profile';
 import { Users } from './home/view/users';
 
 import { SigdreRoutingModule } from './sigdre-routing.module';
@@ -155,6 +157,8 @@ import { SigdreRoutingModule } from './sigdre-routing.module';
         InlineProfileComponent,
         AppTopBar,
         Dashboard,
+        DashboardEmergencias,
+        Profile,
         Users
     ],
     providers:[

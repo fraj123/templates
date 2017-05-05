@@ -1,0 +1,43 @@
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-4">
+        <div class="card">
+            <h1>Imagen de Perfil</h1>
+            <img [src] = "imageProfilePath" height="200">
+            <p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000"> 
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                    </ul>
+                </ng-template>    
+            </p-fileUpload>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-8">
+        <div class="card">
+            <h1>Información de Usuario</h1>
+            <h2>{{nombre}}</h2>
+            <h2>{{paterno}}</h2>
+            <h2>{{materno}}</h2>
+            <h2>{{email}}</h2>
+
+            <button type="text" (click)="showDialog()" pButton icon="fa-external-link-square" label="Editar Información"></button>
+
+            <p-dialog [(visible)]="display">
+                <p-header>
+                    Editar información del usuario
+                </p-header>
+                Content
+            </p-dialog>
+
+        </div>
+    </div>
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <h1>Calendario</h1>
+            <p-schedule [events]="events" [header]="header" defaultDate="2017-02-01" [eventLimit]="4" [editable]="true"
+            (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"></p-schedule>
+
+            
+        </div>
+    </div>
+</div>

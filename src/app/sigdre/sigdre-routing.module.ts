@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { SigdreComponent } from './sigdre.component';
 
 import { Dashboard } from './home/view/dashboard';
+import { DashboardEmergencias } from './home/view/dashboardEmergencias';
+import { Profile } from './home/view/profile';
 import { Users } from './home/view/users';
 
 const sigdreRoutes: Routes = [
@@ -12,7 +14,9 @@ const sigdreRoutes: Routes = [
         component: SigdreComponent,
         children: [
             { path: '', component: Dashboard },
-            { path: 'usuarios', component: Users}
+            { path: 'dashboardEmergencias', component: DashboardEmergencias},
+            { path: 'usuarios', component: Users},
+            { path: 'profile', component: Profile},
             //{ path: '', component: SigdreComponent }
         ]
     }

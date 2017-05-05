@@ -28,6 +28,8 @@ export class LoginService {
 
   public token: string;
 
+  public cargo:number;
+
   constructor(private http: Http) {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
@@ -42,9 +44,15 @@ export class LoginService {
     return this.http.post(this.authURL, body, options)
       .map((response: Response) => {
       let token = response.json() && response.json().token;
+      let usuario = response.json();
+      let cargo = response.json() && response.json().usuario.id_cargo;
+      console.log(cargo);
       if(token) {
         this.token = token;
         localStorage.setItem('currentUser', JSON.stringify({email: email, token: token}));
+        localStorage.setItem('usuario', JSON.stringify({usuario: usuario}));
+        localStorage.setItem('cargo', JSON.stringify({cargo: cargo}));
+        this.cargo = cargo;
         this.loggedIn = true;
         return Observable.of(true).delay(100).do(val => this.loggedIn = true);
       } else{
@@ -63,7 +71,9 @@ export class LoginService {
   }
 
   logout(){
-    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('cargo');
     this.loggedIn = false;
   }
 
