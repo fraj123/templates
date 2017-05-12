@@ -1,16 +1,4 @@
 <div class="ui-g dashboard">
-    <div class="ui-g-12 ui-md-12">
-        <div class="card overview">
-            <div class="overview-content clearfix">
-                <span class="overview-title">Usuarios</span>
-                <span class="overview-badge">+%45</span>
-                <span class="overview-detail">5,200 / day</span>
-            </div>
-            <div class="overview-footer">
-                <img src="assets/layout/images/dashboard/progress.svg" style="width: 100%" />
-            </div>
-        </div>
-    </div>
     
     <div class="ui-g-12 ui-md-6 ui-lg-4">
         <div class="ui-g card colorbox colorbox-2">
@@ -43,6 +31,59 @@
                 <span class="colorbox-name">Inactivos</span>
                 <span class="colorbox-count">22</span>
             </div>
+        </div>
+    </div>
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <h1>Usuarios</h1>
+            <p-dataTable [value]="usuarios" selectionMode="single" [(selection)]="selectedUsuario" (onRowSelect)="onRowSelect($event)" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[5,10,20]">
+                <p-header>Lista de Usuarios</p-header>
+                <p-column field="paterno" header="Paterno" [filter]="true" filterPlaceholder="Buscar"></p-column>
+                <p-column field="materno" header="Materno" [filter]="true" filterPlaceholder="Buscar"></p-column>
+                <p-column field="nombres" header="Nombres" [filter]="true" filterPlaceholder="Buscar"></p-column>
+                <p-column field="email" header="Email" [filter]="true" filterPlaceholder="Buscar"></p-column>
+                <p-column field="cargos.name" header="Cargo"></p-column>
+                <p-column field="estados.name" header="Estado"></p-column>
+                <p-column field="created_at" header="Fecha de creación"></p-column>
+                <p-column field="accion" header="Acciones"></p-column>
+                <p-footer>
+                    <div class="ui-helper-clearfix" style="width:100%">
+                        <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Nuevo Usuario"></button>
+                    </div>
+                </p-footer>
+            </p-dataTable>
+
+            <p-dialog header="Detalles Usuarios" width=500 [(visible)]="dialogDisplay" [responsive]="true" showEffect="fade" [modal]="true">
+                <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="usuario">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="nombre">Nombres</label></div>
+                        <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="usuario.nombres" /></div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="paterno">Apellido Paterno</label></div>
+                        <div class="ui-grid-col-8"><input pInputText id="paterno" [(ngModel)]="usuario.paterno" /></div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="materno">Apellido Materno</label></div>
+                        <div class="ui-grid-col-8"><input pInputText id="materno" [(ngModel)]="usuario.materno" /></div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="email">Correo Electronico</label></div>
+                        <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="usuario.email" /></div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="cargo">Cargo</label></div>
+                        <p-dropdown [options]="cargos.name" [(ngModel)]="cargos" [autoWidth]="false"></p-dropdown>
+                        <div class="ui-grid-col-8"><input pInputText id="cargo" [(ngModel)]="usuario.id_cargo" /></div>
+                    </div>
+                </div>
+                <p-footer>
+                    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                        <button type="button" pButton icon="fa-close" (click)="delete()" label="Cancelar"></button>
+                        <button type="button" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
+                    </div>
+                </p-footer>
+            </p-dialog>
         </div>
     </div>
 </div>

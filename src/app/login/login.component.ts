@@ -23,7 +23,6 @@ export class LoginComponent {
     }
 
     loginUser(email:string, password: string){
-        let cargo = JSON.parse(localStorage.getItem('cargo')).cargo;
         this.message = 'Conectando...';
         if(!email || !password){
             return;
@@ -35,6 +34,7 @@ export class LoginComponent {
                     console.log(localStorage);
                     if(this.loginService.loggedIn){
                         this.loginIncorrect = false;
+                        let cargo = JSON.parse(localStorage.getItem('cargo')).cargo;
                         switch (cargo) {
                             case 1:
                                 this.router.navigate(['sigdre']);       

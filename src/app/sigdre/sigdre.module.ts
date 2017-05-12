@@ -1,4 +1,7 @@
 import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'rxjs/add/operator/toPromise';
@@ -83,6 +86,9 @@ import { SigdreRoutingModule } from './sigdre-routing.module';
 @NgModule({
     imports: [
         CommonModule,
+        BrowserModule,
+        FormsModule,
+        HttpModule,
         BrowserAnimationsModule,
         SigdreRoutingModule,
         AccordionModule,
