@@ -18,11 +18,12 @@ export class CargosService{
         
     }
 
-    getCargos(){
+    getCargos(): Promise<Cargo[]>{
         return this.http.get(this.cargosApi)
         .toPromise()
         .then(res => <Cargo[]> res.json().cargos)
-        .then(data => { return data; });
+        .then(data => { return data; })
+        .catch(this.handleError);
     }
 
     /*

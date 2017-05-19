@@ -53,36 +53,82 @@
                 </p-footer>
             </p-dataTable>
 
-            <p-dialog header="Detalles Usuarios" width=500 [(visible)]="dialogDisplay" [responsive]="true" showEffect="fade" [modal]="true">
+            <p-dialog header="Detalles Usuarios" width=700 [(visible)]="dialogDisplay" [responsive]="true" showEffect="fade" [modal]="true">
                 <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="usuario">
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-4"><label for="nombre">Nombres</label></div>
-                        <div class="ui-grid-col-8"><input pInputText id="nombre" [(ngModel)]="usuario.nombres" /></div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-4"><label for="paterno">Apellido Paterno</label></div>
-                        <div class="ui-grid-col-8"><input pInputText id="paterno" [(ngModel)]="usuario.paterno" /></div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-4"><label for="materno">Apellido Materno</label></div>
-                        <div class="ui-grid-col-8"><input pInputText id="materno" [(ngModel)]="usuario.materno" /></div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-4"><label for="email">Correo Electronico</label></div>
-                        <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="usuario.email" /></div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-4"><label for="cargo">Cargo</label></div>
-                        <p-dropdown [options]="cargos.name" [(ngModel)]="cargos" [autoWidth]="false"></p-dropdown>
-                        <div class="ui-grid-col-8"><input pInputText id="cargo" [(ngModel)]="usuario.id_cargo" /></div>
-                    </div>
+                    <form (ngSubmit)="onSubmit()" #usuariosForm="ngForm">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4"><label for="cargo">Cargo</label></div>
+                                <select class="form-control" id="cargo"
+                                        required
+                                        [(ngModel)]="selectedCargo" 
+                                        name="cargo"
+                                        #cargo="ngModel">
+                                <option *ngFor="let cargo of cargos" [value]="cargo">{{cargo.name}}</option>
+                                <div [hidden]="cargo.valid || cargo.pristine" class="alert alert-danger">
+                                    El campo cargo es obligatorio
+                                </div>
+                            </select>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <label for="nombre">Nombres</label>
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <input  pInputText 
+                                        id="nombre" 
+                                        [(ngModel)]="usuario.nombres" 
+                                        name="nombres" 
+                                        #nombres="ngModel" 
+                                        required/>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <label for="paterno">Apellido Paterno</label>
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <input  pInputText 
+                                        id="paterno" 
+                                        [(ngModel)]="usuario.paterno" 
+                                        name="paterno" 
+                                        #paterno="ngModel" 
+                                        required/>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <label for="materno">Apellido Materno</label>
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <input  pInputText 
+                                        id="materno" 
+                                        [(ngModel)]="usuario.materno" 
+                                        name="materno" 
+                                        #materno="ngModel" 
+                                        required/>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <label for="email">Correo Electrónico</label>
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <input  pInputText 
+                                        id="email" 
+                                        [(ngModel)]="usuario.email" 
+                                        name="email" 
+                                        #email="ngModel" 
+                                        required/>
+                            </div>
+                        </div>
+                        <p-footer>
+                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                <button type="button" pButton icon="fa-check" (click)="save()" [disabled]="!usuariosForm.form.valid" label="Guardar"></button>
+                                <button type="button" pButton icon="fa-close" (click)="delete()" label="Cancelar"></button>
+                            </div>
+                        </p-footer>
+                    </form>
                 </div>
-                <p-footer>
-                    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                        <button type="button" pButton icon="fa-close" (click)="delete()" label="Cancelar"></button>
-                        <button type="button" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
-                    </div>
-                </p-footer>
             </p-dialog>
         </div>
     </div>

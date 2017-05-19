@@ -28,9 +28,12 @@ export class Users implements OnInit {
 
     usuarios: Usuario[];
     cargos: Cargo[];
+    cargosList: SelectItem[];
 
     filteredCargos: any[];
     cargo: string;
+
+    submitted = false;
     
     constructor(private usuariosService: UsuariosService, private cargosService: CargosService) { }
     
@@ -45,11 +48,16 @@ export class Users implements OnInit {
         this.dialogDisplay = true;
     }
 
+    onSubmit() { this.submitted = true; }
+
     save() {
+
+        let usuarios = [...this.usuarios];
+
         if (this.newUsuario) {
             this.usuarios.push(this.usuario)
         } else{
-
+            usuarios[this.findSelectUserIndex()] = this.usuario;
         }
     }
 
