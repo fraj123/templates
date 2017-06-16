@@ -3,7 +3,10 @@ import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Usuario } from '../singletons/usuarios';
 
-import { Observable }     from "rxjs";
+import { Observable } from 'rxjs/Observable';
+import { Subject }    from 'rxjs/Subject';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 import { AppSetting } from "../../../constantes/const";
 
@@ -13,36 +16,74 @@ export class UsuariosService{
     /*
     Constantes de conexion a la API
     */
-    private usuariosApi = AppSetting.API_ENDPOINT + 'usuarios';
+    private usuariosApi     = AppSetting.API_ENDPOINT + 'usuarios';
+    private usuariosSave    = AppSetting.API_ENDPOINT + 'usuarios_add';
+    private usuariosEdit    = AppSetting.API_ENDPOINT + 'usuarios_edit';
+
+    /*
+    Variables de HTTP para desplegar datos en el sistema
+    */
+    private usersSubjects: Subject<any>;
+    private usersRequest: Observable<any>;
+
+    /*
+    Variables de estado de operaciones
+    */
+    public errorEstado: string;
 
     constructor(private http: Http){
-        
+        this.usersSubjects = new Subject();
     }
 
-    getUsuarios(): Promise<Usuario[]>{
-        return this.http.get(this.usuariosApi)
-        .toPromise()
-        .then(res => <Usuario[]> res.json().usuarios)
-        .then(data => { return data; });
+    getUsuarios(): Observable<Usuario[]>{
+        return this.http
+            .get(this.usuariosApi)
+            .map(this.extractUsuariosData)
+            .catch(this.handleError);
     }
 
-    saveUsuarios(cargo:number, nombres: string, paterno: string, materno: string, email: string){
+    saveUsuario(cargo:number, nombres: string, paterno: string, materno: string, username:string, email: string): Observable<Usuario>{
+        let body = JSON.stringify({cargo, nombres, paterno, materno, username, email});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.usuariosApi, { name }, options)
-               .toPromise()
-               .then(this.extractData)
-               .catch(this.handleError);
+
+        return this.http
+            .post(this.usuariosSave, body, options)
+            .map((response: Response) => response.json())
+            .map(response =>{
+                this.errorEstado = response;
+                return this.errorEstado;
+            })
+            .catch(this.handleError);
     }
 
-    private extractData(res: Response) {
+    saveEditUsuario(id: number, cargo:number, nombres: string, paterno: string, materno: string, username:string, email: string, estado: number): Observable<Usuario>{
+        let body = JSON.stringify({cargo, nombres, paterno, materno, username, email, estado});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http
+            .post(this.usuariosEdit+"/"+id, body, options)
+            .map((response: Response) => response.json())
+            .map(response =>{
+                this.errorEstado = response;
+                return this.errorEstado;
+            })
+            .catch(this.handleError);
+    }
+
+    private extractUsuariosData(res: Response) {
         let body = res.json();
-        return body.data || { };
+        return body.usuarios || { };
+    }
+
+    private extractSaveResponse(res: Response) {
+        let body = res.json();
+        return body.error || { };
     }
 
     private handleError (error: Response | any) {
-        // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';
@@ -52,6 +93,7 @@ export class UsuariosService{
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
-        return Promise.reject(errMsg);
+        return Observable.throw(errMsg);
     }
+    
 } 

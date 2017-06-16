@@ -1,0 +1,52 @@
+<div class="ui-g dashboard">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <h1>Privilegios</h1>
+            <p-dataTable [value] = "privilegios" selectmode = "single" [(selection)] = "selectedPrivilegio" (onRowSelect) = "onRowSelect($event)" [rows] = "10" [paginator] = "true" [rowsPerPageOptions]="[5,10,20]">
+                <p-header>Lista de Privilegios</p-header>
+                <p-column field="name" header="Nombre"></p-column>
+                <p-column field="created_at" header="Fecha de Creación">
+                    <ng-template let-col let-car="rowData" let-ri="rowIndex" pTemplate="body">
+                        <span>{{car[col.field] | date:'short'}}</span>
+                    </ng-template>
+                </p-column>
+                <p-footer>
+                    <div class="ui-helper-clearfix" style="width:100%">
+                        <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Nuevo Privilegio"></button>
+                    </div>
+                </p-footer>
+            </p-dataTable>
+
+            <p-dialog header="Detalles Privilegios" width=700 [(visible)]="dialogDisplay" [responsive]="true" showEffect="fade" [modal]="true">
+                <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="privilegio">
+                    <form (ngSubmit)="onSubmit()" #privilegiosForm="ngForm">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <label for="nombres">Nombre</label>
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <input  pInputText 
+                                        id="nombres" 
+                                        [(ngModel)]="privilegio.name" 
+                                        name="nombres" 
+                                        #nombres="ngModel" 
+                                        required/>
+                            </div>
+                        </div>
+                        <input  type="hidden" 
+                                id="id" 
+                                [(ngModel)]="privilegio.id" 
+                                name="id"
+                                #id="ngModel"/>
+                        <p-footer>
+                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                <button type="button" pButton icon="fa-check" (click)="saveRegistro(id.value, nombres.value)" [disabled]="!privilegiosForm.form.valid" label="Guardar"></button>
+                                <button type="button" pButton icon="fa-close" (click)="cancelar()" label="Cancelar"></button>
+                            </div>
+                        </p-footer>
+                    </form>
+                </div>
+            </p-dialog>
+        </div>
+    </div>
+</div>

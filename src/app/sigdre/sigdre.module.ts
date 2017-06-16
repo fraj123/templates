@@ -80,6 +80,9 @@ import { Dashboard } from './home/view/dashboard';
 import { DashboardEmergencias } from './home/view/dashboardEmergencias';
 import { Profile } from './home/view/profile';
 import { Users } from './home/view/users';
+import { Cargos } from './home/view/cargos';
+import { Privilegios } from './home/view/privilegios';
+import { Casos } from './home/view/casosemer';
 
 import { SigdreRoutingModule } from './sigdre-routing.module';
 
@@ -165,7 +168,10 @@ import { SigdreRoutingModule } from './sigdre-routing.module';
         Dashboard,
         DashboardEmergencias,
         Profile,
-        Users
+        Users,
+        Cargos,
+        Privilegios,
+        Casos
     ],
     providers:[
 

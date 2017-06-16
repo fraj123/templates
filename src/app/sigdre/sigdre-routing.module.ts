@@ -7,6 +7,9 @@ import { Dashboard } from './home/view/dashboard';
 import { DashboardEmergencias } from './home/view/dashboardEmergencias';
 import { Profile } from './home/view/profile';
 import { Users } from './home/view/users';
+import { Cargos } from './home/view/cargos';
+import { Privilegios } from './home/view/privilegios';
+import { Casos } from './home/view/casosemer';
 
 const sigdreRoutes: Routes = [
     {
@@ -17,6 +20,9 @@ const sigdreRoutes: Routes = [
             { path: 'dashboardEmergencias', component: DashboardEmergencias},
             { path: 'usuarios', component: Users},
             { path: 'profile', component: Profile},
+            { path: 'cargos', component: Cargos},
+            { path: 'privilegios', component: Privilegios},
+            { path: 'casos', component: Casos},
             //{ path: '', component: SigdreComponent }
         ]
     }

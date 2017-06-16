@@ -1,41 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Cargo } from '../singletons/cargos';
+import { Estados } from '../singletons/usuariosEstados';
 
 import { Observable }     from "rxjs";
 
 import { AppSetting } from "../../../constantes/const";
 
 @Injectable()
-export class CargosService{
+export class UsuarioEstadosService{
 
     /*
     Constantes de conexion a la API
     */
-    private cargosApi = AppSetting.API_ENDPOINT + 'cargos';
+    private estadosApi = AppSetting.API_ENDPOINT + 'usuarios_estados';
 
     constructor(private http: Http){
         
     }
 
-    getCargosList(): Promise<Cargo[]>{
-        return this.http.get(this.cargosApi)
-        .toPromise()
-        .then(res => <Cargo[]> res.json().cargos)
-        .then(data => { return data; })
-        .catch(this.handleError);
-    }
-
-    getCargos(): Observable<Cargo[]>{
+    getUsuarioEstados(): Observable<Estados[]>{
         return this.http
-            .get(this.cargosApi)
-            .map(this.extractCargosData)
+            .get(this.estadosApi)
+            .map(this.extractEstadosData)
             .catch(this.handleError);
     }
 
-    private extractCargosData(res: Response) {
+    private extractEstadosData(res: Response) {
         let body = res.json();
-        return body.cargos || { };
+        return body.estados || { };
     }
 
     /*

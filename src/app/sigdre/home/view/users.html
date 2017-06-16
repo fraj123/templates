@@ -1,5 +1,5 @@
 <div class="ui-g dashboard">
-    
+    <p-growl [(value)]="msgs" sticky="sticky"></p-growl>
     <div class="ui-g-12 ui-md-6 ui-lg-4">
         <div class="ui-g card colorbox colorbox-2">
             <div class="ui-g-4">
@@ -45,7 +45,6 @@
                 <p-column field="cargos.name" header="Cargo"></p-column>
                 <p-column field="estados.name" header="Estado"></p-column>
                 <p-column field="created_at" header="Fecha de creación"></p-column>
-                <p-column field="accion" header="Acciones"></p-column>
                 <p-footer>
                     <div class="ui-helper-clearfix" style="width:100%">
                         <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Nuevo Usuario"></button>
@@ -57,17 +56,19 @@
                 <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="usuario">
                     <form (ngSubmit)="onSubmit()" #usuariosForm="ngForm">
                         <div class="ui-grid-row">
-                            <div class="ui-grid-col-4"><label for="cargo">Cargo</label></div>
-                                <select class="form-control" id="cargo"
-                                        required
-                                        [(ngModel)]="selectedCargo" 
-                                        name="cargo"
-                                        #cargo="ngModel">
-                                <option *ngFor="let cargo of cargos" [value]="cargo">{{cargo.name}}</option>
-                                <div [hidden]="cargo.valid || cargo.pristine" class="alert alert-danger">
-                                    El campo cargo es obligatorio
-                                </div>
+                            <div class="ui-grid-col-4">
+                                <label for="cargo">Cargo</label>
+                            </div>
+                            <select class="form-control" id="cargo"
+                                    required
+                                    [(ngModel)]="usuario.id_cargo" 
+                                    name="cargo"
+                                    #cargo="ngModel">
+                            <option *ngFor="let cargo of cargos" [value]="cargo.id">{{cargo.name}}</option>
                             </select>
+                            <div [hidden]="cargo.valid || cargo.pristine" class="alert alert-danger">
+                                El campo cargo es obligatorio
+                            </div>
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-4">
@@ -110,6 +111,19 @@
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-4">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <input  pInputText 
+                                        id="username" 
+                                        [(ngModel)]="usuario.username" 
+                                        name="username" 
+                                        #username="ngModel" 
+                                        required/>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
                                 <label for="email">Correo Electrónico</label>
                             </div>
                             <div class="ui-grid-col-8">
@@ -121,9 +135,29 @@
                                         required/>
                             </div>
                         </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <label for="estado">Estado de Usuario</label>
+                            </div>
+                            <select class="form-control" id="estado"
+                                    required
+                                    [(ngModel)]="usuario.id_estado" 
+                                    name="estado"
+                                    #estado="ngModel">
+                            <option *ngFor="let estado of estados" [value]="estado.id">{{estado.name}}</option>
+                            </select>
+                            <div [hidden]="estado.valid || estado.pristine" class="alert alert-danger">
+                                El campo estado es obligatorio
+                            </div>
+                        </div>
+                        <input  type="hidden" 
+                                id="id" 
+                                [(ngModel)]="usuario.id" 
+                                name="id"
+                                #id="ngModel"/>
                         <p-footer>
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                <button type="button" pButton icon="fa-check" (click)="save()" [disabled]="!usuariosForm.form.valid" label="Guardar"></button>
+                                <button type="button" pButton icon="fa-check" (click)="saveUsuario(id.value, cargo.value, nombres.value, paterno.value, materno.value, username.value, email.value, estado.value)" [disabled]="!usuariosForm.form.valid" label="Guardar"></button>
                                 <button type="button" pButton icon="fa-close" (click)="delete()" label="Cancelar"></button>
                             </div>
                         </p-footer>

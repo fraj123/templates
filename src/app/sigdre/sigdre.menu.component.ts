@@ -30,17 +30,17 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Cargos y Privilegios', icon: 'menu',
                         items: [
-                            {label: 'Cargos', icon: 'input'},
-                            {label: 'Privilegios', icon: 'input'}
+                            {label: 'Cargos', icon: 'input', routerLink: ['./cargos']},
+                            {label: 'Privilegios', icon: 'input', routerLink: ['./privilegios']}
                         ]
                     },
-                    {label: 'Casos Emergencia', icon: 'error_outline'}
+                    {label: 'Casos Emergencia', icon: 'error_outline', routerLink: ['./casos']}
                 ];
                 break;
             case 2:
                 this.model = [
                     {label: 'Dashboard', icon: 'dashboard', routerLink: ['./dashboardEmergencias']},
-                    {label: 'Casos Emergencia', icon: 'error_outline'}
+                    {label: 'Casos Emergencia', icon: 'error_outline', routerLink: ['./casos']}
                 ]
                 break;
             default:
