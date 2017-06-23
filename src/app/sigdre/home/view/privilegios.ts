@@ -61,8 +61,7 @@ export class Privilegios implements OnInit {
 
     getPrivilegios(){
         this.privilegiosService.getPrivilegios().subscribe(
-            privilegios => this.privilegios = privilegios
-        )
+            privilegios => this.privilegios = privilegios);
     }
 
     /**
@@ -118,7 +117,6 @@ export class Privilegios implements OnInit {
                 .subscribe(
                     privilegios => this.privilegios.push(this.privilegio),
                 );
-            privilegios.push(this.privilegio);
         } else{
             privilegios[this.findSelectColumIndex()] = this.privilegio;
             this.privilegiosService.saveEditPrivilegios(id, nombre)
